@@ -1,25 +1,27 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import morgan from "morgan";
+import cors from "cors";
+
 import "./DB/mongoose.js";
 
-import * as productController from "./Controllers/productController.js";
+import { router as productRouter } from "./Routes/product.js";
 
 dotenv.config();
-const api = process.env.API_URL;
 const app = express();
+const api = process.env.API_URL;
 
 // middlewares
+app.use(cors());
+app.options("*", cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 
+// routes
+app.use(`${api}/products`, productRouter);
 app.get("/", (req, res) => {
   res.send("home page ");
 });
-
-app.get("/products", productController.getAllProducts);
-app.get("/products:id", productController.getProductById);
-app.post("/products", productController.createProduct);
 
 const PORT = 3030;
 app.listen(PORT, (error) => {
