@@ -1,0 +1,13 @@
+
+//basic general configutation for all aplication
+body , .p-component {
+    font-family: 'Raleway', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    @include reset-list;
+}

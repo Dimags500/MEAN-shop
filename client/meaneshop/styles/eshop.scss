@@ -1,0 +1,36 @@
+// order important !
+//base 
+@import'./base/colors.scss';
+@import'./base/fonts.scss';
+@import'./base/mixins.scss';
+@import'./base/configuration.scss';
+
+//3D libraries 
+
+// @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css');
+//@import'~bootstrap/scss/bootstrap.scss';
+
+@import'~primeicons/primeicons.css';
+@import'~primeng/resources/themes/lara-light-blue/theme.css';
+@import'~primeng/resources/primeng.min.css';
+
+@import '~primeflex/primeflex.scss';
+
+
+
+//pages 
+@import'./apps//eshop/pages/products-list-page.scss';
+@import'./apps//eshop/pages/home-page.scss';
+
+//shared 
+@import'./apps/eshop/shared/headre.scss';
+@import'./apps/eshop/shared/footer.scss';
+
+//libs 
+@import'./libs//ui/ui.scss';
+
+
+
+.red-class{
+    color: $primary-color;
+}
