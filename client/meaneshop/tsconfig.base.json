@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@meaneshop/orders": ["libs/orders/src/index.ts"],
+      "@meaneshop/products": ["libs/products/src/index.ts"],
+      "@meaneshop/ui": ["libs/ui/src/index.ts"],
+      "@meaneshop/users": ["libs/users/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
