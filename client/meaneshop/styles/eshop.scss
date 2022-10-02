@@ -1,7 +1,19 @@
 // order important !
-@import'./basic/colors.scss';
-@import'./basic/configuration.scss';
-@import'./basic/fonts.scss';
+//base 
+@import'./base/colors.scss';
+@import'./base/fonts.scss';
+@import'./base/mixins.scss';
+@import'./base/configuration.scss';
+
+
+//pages 
+@import'./apps//eshop/pages/products-list-page.scss';
+@import'./apps//eshop/pages/home-page.scss';
+
+//shared 
+@import'./apps/eshop/shared/headre.scss';
+@import'./apps/eshop/shared/footer.scss';
+
 
 
 .red-class{
