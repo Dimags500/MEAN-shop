@@ -1,0 +1,9 @@
+// order important !
+@import'./basic/colors.scss';
+@import'./basic/configuration.scss';
+@import'./basic/fonts.scss';
+
+
+.red-class{
+    color: $primary-color;
+}
