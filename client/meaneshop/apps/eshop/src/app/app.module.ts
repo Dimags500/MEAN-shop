@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -8,6 +10,9 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { UiModule } from '@meaneshop/ui';
+
+import { AccordionModule } from 'primeng/accordion';
+
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'products', component: ProductListComponent },
@@ -21,7 +26,13 @@ const routes: Routes = [
     FooterComponent,
     HeaderComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes), UiModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
+    UiModule,
+    AccordionModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
