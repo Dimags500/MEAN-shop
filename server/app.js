@@ -6,6 +6,7 @@ import cors from "cors";
 import "./DB/mongoose.js";
 
 import { router as productRouter } from "./Routes/product.js";
+import { router as categoryRouter } from "./Routes/category.js";
 
 dotenv.config();
 const app = express();
@@ -19,6 +20,8 @@ app.use(morgan("tiny"));
 
 // routes
 app.use(`${api}/products`, productRouter);
+app.use(`${api}/categories`, categoryRouter);
+
 app.get("/", (req, res) => {
   res.send("home page ");
 });
