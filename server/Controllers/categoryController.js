@@ -31,7 +31,7 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-const deleteCategory = async (req, res) => {
+const deleteCategoryById = async (req, res) => {
   const { id: categoryId } = req.params;
 
   console.log(categoryId);
@@ -93,7 +93,7 @@ const getCategoryById = async (req, res) => {
 export {
   createCategory,
   getAllCategories,
-  deleteCategory,
+  deleteCategoryById,
   getCategoryById,
   updateCategoryById,
 };
