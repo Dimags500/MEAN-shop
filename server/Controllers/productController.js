@@ -120,6 +120,20 @@ const deleteProductById = async (req, res) => {
       return res.status(400).json({ success: false, error: err });
     });
 };
+
+const getProductsCount = async (req, res) => {
+  try {
+    const productsCount = await Product.countDocuments({});
+    console.log(productsCount);
+    res.status(200).json({ count: productsCount });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "cant get products count",
+    });
+  }
+};
+
 export {
   createProduct,
   getProducts,
@@ -127,4 +141,5 @@ export {
   getProductsNames,
   updateProductById,
   deleteProductById,
+  getProductsCount,
 };

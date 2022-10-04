@@ -5,6 +5,7 @@ import * as productController from "../Controllers/productController.js";
 
 router.get("/", productController.getProducts);
 router.get("/names", productController.getProductsNames);
+router.get("/get/count", productController.getProductsCount);
 
 router.get("/:id", productController.getProductById);
 router.post("/", productController.createProduct);
