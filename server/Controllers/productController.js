@@ -32,10 +32,16 @@ const createProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate("category");
+    let filter = {};
+
+    if (req.query.categories) {
+      console.log(req.query.categories);
+
+      filter = { category: req.query.categories.split(",") };
+    }
+    const products = await Product.find(filter).populate("category");
     res.status(200).send(products);
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       message: "cant get products ",
     });
@@ -124,12 +130,27 @@ const deleteProductById = async (req, res) => {
 const getProductsCount = async (req, res) => {
   try {
     const productsCount = await Product.countDocuments({});
-    console.log(productsCount);
     res.status(200).json({ count: productsCount });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       message: "cant get products count",
+    });
+  }
+};
+
+const getFeaturedProducts = async (req, res) => {
+  try {
+    const count =
+      req.params.count && req.params.count > 0 ? req.params.count : 0;
+    const featuredProducts = await Product.find({ isFeatured: true }).limit(
+      parseInt(count)
+    );
+    res.status(200).json(featuredProducts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "cant get featuredProducts",
     });
   }
 };
@@ -142,4 +163,5 @@ export {
   updateProductById,
   deleteProductById,
   getProductsCount,
+  getFeaturedProducts,
 };
