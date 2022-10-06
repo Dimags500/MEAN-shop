@@ -1,6 +1,9 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@meaneshop/products';
+import { MessageService } from 'primeng/api';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'meaneshop-categories-form',
@@ -13,7 +16,9 @@ export class CategoriesFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private categoryService: CategoriesService
+    private categoriesService: CategoriesService,
+    private messageService: MessageService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -21,6 +26,10 @@ export class CategoriesFormComponent implements OnInit {
       name: ['', Validators.required],
       icon: ['', Validators.required],
     });
+  }
+
+  onCancle() {
+    this.location.back();
   }
 
   onSubmit() {
@@ -34,7 +43,28 @@ export class CategoriesFormComponent implements OnInit {
       name: this.categoryForm['name'].value,
       icon: this.categoryForm['icon'].value,
     };
-    this.categoryService.createCategory(category).subscribe();
+    this.categoriesService.createCategory(category).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'success',
+          detail: 'Category is Created',
+        });
+        timer(2000)
+          .toPromise()
+          .then(() => {
+            this.location.back();
+          });
+      },
+      (error) => {
+        console.log(error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Category is NOT Created',
+          detail: error.statusText,
+        });
+      }
+    );
   }
 
   get categoryForm() {

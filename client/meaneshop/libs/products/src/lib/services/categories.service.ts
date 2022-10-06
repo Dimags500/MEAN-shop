@@ -13,7 +13,10 @@ export class CategoriesService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.URL);
   }
-  createCategory(category: Category) {
+  createCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(this.URL, category);
+  }
+  deleteCategory(categoryId: string): Observable<object> {
+    return this.http.delete<object>(this.URL + categoryId);
   }
 }
