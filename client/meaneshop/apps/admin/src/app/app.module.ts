@@ -20,6 +20,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 import { CategoriesService } from '@meaneshop/products';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
@@ -32,6 +33,7 @@ const UX_MODULE = [
   InputTextModule,
   ToastModule,
   ConfirmDialogModule,
+  ColorPickerModule,
 ];
 
 const routes: Routes = [
