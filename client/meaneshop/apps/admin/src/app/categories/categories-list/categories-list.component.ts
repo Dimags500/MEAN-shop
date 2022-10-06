@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@meaneshop/products';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
@@ -14,7 +15,8 @@ export class CategoriesListComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class CategoriesListComponent implements OnInit {
   }
 
   editCategory(categoryId: string) {
-    alert('edit');
+    this.router.navigateByUrl(`categories/form/${categoryId}`);
   }
 
   deleteCategory(categoryId: string) {

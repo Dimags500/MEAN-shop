@@ -10,6 +10,9 @@ export class CategoriesService {
   URL = 'http://localhost:3030/api/v1/categories/';
   constructor(private http: HttpClient) {}
 
+  getCategoryById(categoryId: string): Observable<Category> {
+    return this.http.get<Category>(this.URL + categoryId);
+  }
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.URL);
   }
@@ -18,5 +21,8 @@ export class CategoriesService {
   }
   deleteCategory(categoryId: string): Observable<object> {
     return this.http.delete<object>(this.URL + categoryId);
+  }
+  updateCategory(category: Category): Observable<Category> {
+    return this.http.put<Category>(this.URL + category.id, category);
   }
 }
