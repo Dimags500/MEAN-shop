@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@meaneshop/products';
+
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'meaneshop-categories-list',
+  selector: 'admin-categories-list',
   templateUrl: './categories-list.component.html',
   styles: [],
 })
@@ -34,7 +35,7 @@ export class CategoriesListComponent implements OnInit {
       icon: 'pi pi-trash',
       accept: () => {
         return this.categoriesService.deleteCategory(categoryId).subscribe(
-          (res) => {
+          () => {
             this.messageService.add({
               severity: 'success',
               summary: 'success',
@@ -52,7 +53,6 @@ export class CategoriesListComponent implements OnInit {
           }
         );
       },
-      reject: (type) => {},
     });
   }
 
