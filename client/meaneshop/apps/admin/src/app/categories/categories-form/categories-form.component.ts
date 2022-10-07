@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
 
 @Component({
-  selector: 'meaneshop-categories-form',
+  selector: 'admin-categories-form',
   templateUrl: './categories-form.component.html',
   styles: [],
 })
@@ -78,7 +78,7 @@ export class CategoriesFormComponent implements OnInit {
   }
   private _updateCatrgory(category: Category) {
     this.categoriesService.updateCategory(category).subscribe(
-      (res) => {
+      () => {
         this.messageService.add({
           severity: 'success',
           summary: 'success',
@@ -103,7 +103,7 @@ export class CategoriesFormComponent implements OnInit {
 
   private _createCategory(category: Category) {
     this.categoriesService.createCategory(category).subscribe(
-      (res) => {
+      () => {
         this.messageService.add({
           severity: 'success',
           summary: 'success',
