@@ -24,6 +24,8 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 
 import { CategoriesService } from '@meaneshop/products';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 
 const UX_MODULE = [
   CardModule,
@@ -57,6 +59,18 @@ const routes: Routes = [
         path: 'categories/form/:id',
         component: CategoriesFormComponent,
       },
+      {
+        path: 'products',
+        component: ProductsListComponent,
+      },
+      {
+        path: 'products/form',
+        component: ProductsFormComponent,
+      },
+      {
+        path: 'products/form/:id',
+        component: ProductsFormComponent,
+      },
     ],
   },
 ];
@@ -69,6 +83,8 @@ const routes: Routes = [
     SidebarComponent,
     CategoriesListComponent,
     CategoriesFormComponent,
+    ProductsListComponent,
+    ProductsFormComponent,
   ],
   imports: [
     BrowserModule,
