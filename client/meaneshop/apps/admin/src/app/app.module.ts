@@ -23,6 +23,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ColorPickerModule } from 'primeng/colorpicker';
 
 import { CategoriesService } from '@meaneshop/products';
+import { ProductsService } from '@meaneshop/products';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
@@ -95,7 +96,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     UX_MODULE,
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService],
+  providers: [
+    CategoriesService,
+    ProductsService,
+    MessageService,
+    ConfirmationService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
