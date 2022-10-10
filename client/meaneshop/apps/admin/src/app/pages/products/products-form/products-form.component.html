@@ -1,1 +1,94 @@
-<p>products-form works!</p>
+<p-toast></p-toast>
+<div class="admin-page">
+    <p-card [header]=" editMode ?'Edit Product' :'Add Product'" subheader="Product From ">
+        <div class="grid">
+            <div class="col-12 ">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left"></div>
+                    <div class="p-toolbar-group-right">
+                        <p-button [label]="editMode ? 'Update' : 'Create' " icon="pi pi-plus"
+                            styleClass="p-button-success mr-2" (click)="onSubmit()">
+                        </p-button>
+                        <p-button (click)="onCancle()" label="Cancle" icon="pi pi-trash" styleClass="p-button-danger "
+                            iconPos="left">
+                        </p-button>
+
+                    </div>
+                </p-toolbar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-12">
+                <form [formGroup]="form">
+
+                    <div class="field col ">
+                        <label for="name" class="col-fixed" style="width:100px">Name</label>
+                        <input formControlName="name" id="name" type="text"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                        <div *ngIf="productForm['name'].invalid && isSubmitted" style="color: red;" class="error">
+                            name is
+                            required</div>
+                    </div>
+
+
+
+                    <div class="field col">
+                        <label for="brand" class="col-fixed" style="width:100px">Brand</label>
+                        <input formControlName="brand" id="brand" type="text"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                        <div *ngIf="productForm['brand'].invalid && isSubmitted" style="color: red;" class="error">
+                            Brand is
+                            required</div>
+                    </div>
+
+
+                    <div class="field col">
+                        <label for="price" class="col-fixed" style="width:100px">Price </label>
+                        <p-inputNumber formControlName="price" mode="decimal" inputId="price" [useGrouping]="false">
+                        </p-inputNumber>
+                        <div *ngIf="productForm['price'].invalid && isSubmitted" style="color: red;" class="error">
+                            Price is required</div>
+                    </div>
+
+                    <div class="field col">
+                        <label for="category" class="col-fixed" style="width:100px">Category</label>
+                        <p-dropdown [options]="categories" formControlName="category" optionLabel="name" [filter]="true"
+                            filterBy="name" placeholder="Select Category"></p-dropdown>
+
+                        <div *ngIf="productForm['category'].invalid && isSubmitted" style="color: red;" class="error">
+                            category is required</div>
+                    </div>
+
+                    <div class="field col">
+                        <label for="countInStock" class="col-fixed" style="width:100px">inStock</label>
+                        <p-inputNumber formControlName="countInStock" mode="decimal" inputId="countInStock"
+                            [useGrouping]="false">
+                        </p-inputNumber>
+                        <div *ngIf="productForm['countInStock'].invalid && isSubmitted" style="color: red;"
+                            class="error">
+                            countInStock is required</div>
+                    </div>
+
+                    <div class="field col ">
+                        <label for="description" class="col-fixed" style="width:100px">Description</label>
+                        <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"
+                            fromControlName="countInStock"></textarea>
+
+                        <div *ngIf="productForm['description'].invalid && isSubmitted" style="color: red;"
+                            class="error">
+                            countInStock is required</div>
+                    </div>
+
+
+                    <div class="field col">
+                        <label for="isFeatured" class="col-fixed" style="width:100px">is Featured</label>
+                        <p-inputSwitch formControlName="isFeatured"></p-inputSwitch>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </p-card>
+</div>
