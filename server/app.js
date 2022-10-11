@@ -13,7 +13,7 @@ const app = express();
 const api = process.env.API_URL;
 
 // middlewares
-//app.use(cors());
+app.use(cors());
 app.options("*", cors());
 app.use(express.json());
 app.use(express.static("public"));
