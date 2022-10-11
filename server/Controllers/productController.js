@@ -3,12 +3,16 @@ import { Product } from "../Models/product.js";
 import mongoose from "mongoose";
 
 const createProduct = async (req, res) => {
+  const file = req.file;
+  if (!file) return res.status(400).send("no image !!");
+  const fileName = req.file.filename;
+  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
   try {
     const doc = new Product({
       name: req.body.name,
       description: req.body.description,
       richDescription: req.body.richDescription,
-      image: req.body.image,
+      image: `${basePath}${fileName}`,
       images: req.body.images,
       brand: req.body.brand,
       price: req.body.price,
@@ -62,14 +66,25 @@ const getProductsNames = async (req, res) => {
 
 const updateProductById = async (req, res) => {
   const { id: productId } = req.params;
+
+  const product = await Product.findById(productId);
+  if (!product) return res.status(400).send("invalid product");
+
+  const file = req.file;
+  if (!file) return res.status(400).send("no image !!");
+
+  const fileName = req.file.filename;
+  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+  let imagePath = file ? `${basePath}${fileName}` : product.image;
+
   try {
-    let product = await Product.findByIdAndUpdate(
+    let updatedProduct = await Product.findByIdAndUpdate(
       productId,
       {
         name: req.body.name,
         description: req.body.description,
         richDescription: req.body.richDescription,
-        image: req.body.image,
+        image: imagePath,
         images: req.body.images,
         brand: req.body.brand,
         price: req.body.price,
@@ -82,7 +97,7 @@ const updateProductById = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).send(product);
+    res.status(200).send(updatedProduct);
   } catch (error) {
     if (!mongoose.isValidObjectId(req.params.id)) {
       res.status(400).send("Invalid Product Id");
@@ -155,6 +170,37 @@ const getFeaturedProducts = async (req, res) => {
   }
 };
 
+const gallery = async (req, res) => {
+  const files = req.files;
+  const { id: productId } = req.params;
+  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+  if (!files) return res.status(400).send("no images !!");
+  let imagesPaths = [];
+
+  if (files)
+    files.forEach((file) => imagesPaths.push(`${basePath}${file.filename}`));
+
+  try {
+    let product = await Product.findByIdAndUpdate(
+      productId,
+      {
+        images: imagesPaths,
+      },
+      { new: true }
+    );
+
+    res.status(200).send(product);
+  } catch (error) {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      res.status(400).send("Invalid Product Id");
+    } else {
+      res.status(500).json({
+        message: "cant update product ",
+      });
+    }
+  }
+};
+
 export {
   createProduct,
   getProducts,
@@ -164,4 +210,5 @@ export {
   deleteProductById,
   getProductsCount,
   getFeaturedProducts,
+  gallery,
 };

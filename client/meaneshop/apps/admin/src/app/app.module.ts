@@ -21,9 +21,16 @@ import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { CategoriesService } from '@meaneshop/products';
+import { ProductsService } from '@meaneshop/products';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 
 const UX_MODULE = [
   CardModule,
@@ -34,6 +41,10 @@ const UX_MODULE = [
   ToastModule,
   ConfirmDialogModule,
   ColorPickerModule,
+  InputNumberModule,
+  DropdownModule,
+  InputTextareaModule,
+  InputSwitchModule,
 ];
 
 const routes: Routes = [
@@ -57,6 +68,18 @@ const routes: Routes = [
         path: 'categories/form/:id',
         component: CategoriesFormComponent,
       },
+      {
+        path: 'products',
+        component: ProductsListComponent,
+      },
+      {
+        path: 'products/form',
+        component: ProductsFormComponent,
+      },
+      {
+        path: 'products/form/:id',
+        component: ProductsFormComponent,
+      },
     ],
   },
 ];
@@ -69,6 +92,8 @@ const routes: Routes = [
     SidebarComponent,
     CategoriesListComponent,
     CategoriesFormComponent,
+    ProductsListComponent,
+    ProductsFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +104,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     UX_MODULE,
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService],
+  providers: [
+    CategoriesService,
+    ProductsService,
+    MessageService,
+    ConfirmationService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

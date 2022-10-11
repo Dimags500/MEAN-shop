@@ -16,6 +16,7 @@ const api = process.env.API_URL;
 app.use(cors());
 app.options("*", cors());
 app.use(express.json());
+app.use(express.static("public"));
 app.use(morgan("tiny"));
 
 // routes

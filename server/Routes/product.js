@@ -1,12 +1,26 @@
 import express from "express";
-const router = express.Router();
-
+import imageUploader from "../DB/multer.js";
 import * as productController from "../Controllers/productController.js";
+
+const router = express.Router();
 
 router.get("/", productController.getProducts);
 router.get("/:id", productController.getProductById);
-router.post("/", productController.createProduct);
-router.put("/:id", productController.updateProductById);
+router.post(
+  "/",
+  imageUploader.single("image"),
+  productController.createProduct
+);
+router.put(
+  "/:id",
+  imageUploader.single("image"),
+  productController.updateProductById
+);
+router.put(
+  "/gallery-images/:id",
+  imageUploader.array("images", 10),
+  productController.gallery
+);
 router.delete("/:id", productController.deleteProductById);
 
 router.get("/names", productController.getProductsNames);
