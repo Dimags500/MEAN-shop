@@ -2,6 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
+
 import "./DB/mongoose.js";
 
 import { router as productRouter } from "./Routes/product.js";
@@ -12,9 +13,10 @@ const app = express();
 const api = process.env.API_URL;
 
 // middlewares
-app.use(cors());
+//app.use(cors());
 app.options("*", cors());
 app.use(express.json());
+app.use(express.static("public"));
 app.use(morgan("tiny"));
 
 // routes

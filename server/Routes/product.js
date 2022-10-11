@@ -11,7 +11,16 @@ router.post(
   imageUploader.single("image"),
   productController.createProduct
 );
-router.put("/:id", productController.updateProductById);
+router.put(
+  "/:id",
+  imageUploader.single("image"),
+  productController.updateProductById
+);
+router.put(
+  "/gallery-images/:id",
+  imageUploader.array("images", 10),
+  productController.gallery
+);
 router.delete("/:id", productController.deleteProductById);
 
 router.get("/names", productController.getProductsNames);
