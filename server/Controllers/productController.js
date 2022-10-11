@@ -3,6 +3,8 @@ import { Product } from "../Models/product.js";
 import mongoose from "mongoose";
 
 const createProduct = async (req, res) => {
+  const file = req.file;
+  if (!file) return res.status(400).send("no image !!");
   const fileName = req.file.filename;
   const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
   try {
