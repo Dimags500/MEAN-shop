@@ -1,11 +1,16 @@
 import express from "express";
-const router = express.Router();
-
+import imageUploader from "../DB/multer.js";
 import * as productController from "../Controllers/productController.js";
+
+const router = express.Router();
 
 router.get("/", productController.getProducts);
 router.get("/:id", productController.getProductById);
-router.post("/", productController.createProduct);
+router.post(
+  "/",
+  imageUploader.single("image"),
+  productController.createProduct
+);
 router.put("/:id", productController.updateProductById);
 router.delete("/:id", productController.deleteProductById);
 

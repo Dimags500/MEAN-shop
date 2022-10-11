@@ -3,12 +3,14 @@ import { Product } from "../Models/product.js";
 import mongoose from "mongoose";
 
 const createProduct = async (req, res) => {
+  const fileName = req.file.filename;
+  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
   try {
     const doc = new Product({
       name: req.body.name,
       description: req.body.description,
       richDescription: req.body.richDescription,
-      image: req.body.image,
+      image: `${basePath}${fileName}`,
       images: req.body.images,
       brand: req.body.brand,
       price: req.body.price,

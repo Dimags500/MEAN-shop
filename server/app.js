@@ -2,7 +2,6 @@ import express from "express";
 import * as dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
-
 import "./DB/mongoose.js";
 
 import { router as productRouter } from "./Routes/product.js";
